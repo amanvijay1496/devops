@@ -1,0 +1,292 @@
+<div class="container">
+  <h1>OnBoarding Form</h1>
+  <form #onBoardForm="ngForm" (ngSubmit)="OnSubmit()" novalidate>
+    <!-- Row No 1 -->
+    <div class="row">
+      <div class="col-md-2"><label>Project Name</label></div>
+      <div class="col-md-4">
+        <input
+          #pName="ngModel"
+          type="text"
+          pattern="^[A-Za-z0-9]{3,15}$"
+          required
+          class="form-control"
+          placeholder="Project Name"
+          name="projectName"
+          [(ngModel)]="onBoardForm.projectName"
+        />
+        <div
+          *ngIf="
+            pName.errors && (pName.invalid || pName.touched) && pName.touched
+          "
+          class="alert alert-danger"
+        >
+          <small
+            class=" alert-dismissible fade show"
+            *ngIf="pName.errors.required && pName.touched"
+            >Proejct Name is required</small
+          >
+          <small
+            class="alert-dismissible fade show"
+            *ngIf="pName.errors.pattern"
+            >Proejct Name Should contain only alphanumberic value and should not
+            exceed 15 characters.</small
+          >
+        </div>
+      </div>
+      <div class="col-md-2"><label>Project Id</label></div>
+      <div class="col-md-4">
+        <input
+          #projId="ngModel"
+          type="text"
+          required
+          class="form-control"
+          placeholder="ID"
+          name="projectId"
+          [(ngModel)]="onBoardForm.projectId"
+        />
+        <div
+          *ngIf="
+            projId.errors &&
+            (projId.invalid || projId.touched) &&
+            projId.touched
+          "
+          class="alert alert-danger"
+        >
+          <small
+            class="alert-dismissible fade show"
+            *ngIf="projId.errors.required && projId.touched"
+            >Password is Required</small
+          >
+          <!-- <small class="text-danger" *ngIf="pName.errors.pattern"
+                  >Product Id Should not start with zero and max length is 5</small
+                > -->
+        </div>
+      </div>
+    </div>
+    <!-- Row No 2 -->
+    <div class="row">
+      <div class="col-md-2"><label>Job Name</label></div>
+      <div class="col-md-4">
+        <input
+          #jName="ngModel"
+          type="text"
+          pattern="^[A-Za-z0-9]{3,15}$"
+          required
+          class="form-control"
+          placeholder="Job Name"
+          name="jobName"
+          [(ngModel)]="onBoardForm.jobName"
+        />
+        <div
+          *ngIf="
+            jName.errors && (jName.invalid || jName.touched) && jName.touched
+          "
+          class="alert alert-danger"
+        >
+          <small
+            class=" alert-dismissible fade show"
+            *ngIf="jName.errors.required && jName.touched"
+            >Proejct Name is required</small
+          >
+          <small
+            class="alert-dismissible fade show"
+            *ngIf="jName.errors.pattern"
+            >Proejct Name Should contain only alphanumberic value and should not
+            exceed 15 characters.</small
+          >
+        </div>
+      </div>
+      <div class="col-md-2"><label>Release Date</label></div>
+      <div class="col-md-4">
+        <p-calendar
+          [(ngModel)]="releaseDate"
+          #cBaseRNew="ngModel"
+          name="releaseDate123"
+          [showIcon]="true"
+          required
+        ></p-calendar>
+        <!-- <input
+  #relDate="ngModel"
+  type="text"
+  pattern="^[A-Za-z0-9]{3,15}$"
+  required
+  class="form-control"
+  placeholder="Release date"
+  name="relDate"
+  [(ngModel)]="onBoardForm.relDate"
+/>
+<div
+  *ngIf="
+    relDate.errors &&
+    (relDate.invalid || relDate.touched) &&
+    relDate.touched
+  "
+  class="alert alert-danger"
+>
+  <small
+    class=" alert-dismissible fade show"
+    *ngIf="relDate.errors.required && relDate.touched"
+    >Proejct Name is required</small
+  >
+  <small
+    class="alert-dismissible fade show"
+    *ngIf="relDate.errors.pattern"
+    >Proejct Name Should contain only alphanumberic value and should not
+    exceed 15 characters.</small
+  >
+</div> -->
+      </div>
+    </div>
+    <!-- Row No 3 -->
+    <div class="row">
+      <div class="col-md-2"><label>Application Name</label></div>
+      <div class="col-md-4">
+        <input
+          #appName="ngModel"
+          type="text"
+          pattern="^[A-Za-z0-9]{3,15}$"
+          required
+          class="form-control"
+          placeholder="Application Name"
+          name="appName"
+          [(ngModel)]="onBoardForm.appName"
+        />
+        <!-- <div *ngIf="relDate.errors && (relDate.invalid || relDate.touched) && relDate.touched" class="alert alert-danger">
+                <small
+                  class=" alert-dismissible fade show"
+                  *ngIf="relDate.errors.required && relDate.touched"
+                  >Proejct Name is required</small
+                >
+                <small class="alert-dismissible fade show" *ngIf="relDate.errors.pattern"
+                  >ceed 15 characters.</small
+                >
+              </div> -->
+      </div>
+      <div class="col-md-2"><label>AppTypes:</label></div>
+      <div class="col-md-4">
+        <select
+        #appType="ngModel"
+          name="appType"
+          class="custom-select"
+          id="inputGroupSelect01"
+          [(ngModel)]="selectedAppType1.id"
+          (change)="onSelect2($event.target.value)"
+          required
+        >
+          <option value="0"  disabled >--Select--</option>
+          <option *ngFor="let apptype of apptypes" value="{{ apptype.id }}">{{
+            apptype.name
+          }}</option>
+        </select>
+      </div>
+    </div>
+    <!-- Row No 4 -->
+    <div class="row">
+      <div class="col-md-2"><label>CodeBases:</label></div>
+      <div class="col-md-4">
+        <select
+          name="codebase"
+          class="custom-select"
+          id="inputGroupSelect01"
+          required
+        >
+          <option value="0">--Select--</option>
+          <option
+            *ngFor="let codebase of codebases"
+            value="{{ codebase.id }}"
+            >{{ codebase.name }}</option
+          >
+        </select>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-4"></div>
+    </div>
+    <!-- Row No 5 -->
+    <div class="row">
+      <div class="col-md-2"><label>Jenkins Username</label></div>
+      <div class="col-md-4">
+        <input
+          #jName="ngModel"
+          type="text"
+          pattern="^[A-Za-z0-9]{3,15}$"
+          required
+          class="form-control"
+          placeholder="Jenkins Name"
+          name="jenkinUName"
+          [(ngModel)]="onBoardForm.jenkinsUName"
+        />
+        <div
+          *ngIf="
+            jName.errors && (jName.invalid || jName.touched) && jName.touched
+          "
+          class="alert alert-danger"
+        >
+          <small
+            class=" alert-dismissible fade show"
+            *ngIf="jName.errors.required && jName.touched"
+            >Proejct Name is required</small
+          >
+          <small
+            class="alert-dismissible fade show"
+            *ngIf="jName.errors.pattern"
+            >Jenkins Username Should contain only alphanumberic value and should
+            not exceed 15 characters.</small
+          >
+        </div>
+      </div>
+      <div class="col-md-2"><label>Jenkins Password</label></div>
+      <div class="col-md-4">
+        <input
+          #passId="ngModel"
+          type="password"
+          required
+          class="form-control"
+          placeholder="Enter your password"
+          name="password"
+          [(ngModel)]="onBoardForm.password"
+        />
+        <div
+          *ngIf="
+            passId.errors &&
+            (passId.invalid || passId.touched) &&
+            passId.touched
+          "
+          class="alert alert-danger"
+        >
+          <small
+            class="alert-dismissible fade show"
+            *ngIf="passId.errors.required && passId.touched"
+            >Password is Required</small
+          >
+        </div>
+      </div>
+    </div>
+    <!-- Row no 6 -->
+    <div class="row">
+      <div class="col-md-2"><label>Source Code Management</label></div>
+      <div class="col-md-4"></div>
+      <div class="col-md-2"></div>
+      <div class="col-md-4"></div>
+    </div>
+    <!-- Row no 7 -->
+    <div class="row">
+      <div class="col-md-2"><label>Comments</label></div>
+      <div class="col-md-10">
+        <textarea rows="1" class="form-control"> </textarea>
+      </div>
+    </div>
+    <!-- Completed Form -->
+    <button [disabled]="onBoardForm.form.invalid" class="btn btn-primary">
+      Submit
+    </button>
+    {{ successMsg }}
+  </form>
+</div>
+<button
+  pButton
+  type="button"
+  (click)="showPopUp(5)"
+  label="Complete Details"
+  class="ui-button-rounded"
+></button>
