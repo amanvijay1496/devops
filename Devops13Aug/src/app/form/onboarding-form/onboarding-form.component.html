@@ -1,0 +1,484 @@
+<div class="container">
+  <h1>OnBoarding Form</h1>
+  <form #onBoardForm="ngForm"  (ngSubmit)="OnSubmit()" novalidate>
+    <!-- Row No 1 -->
+    <div class="row">
+      <div class="col-md-2"><label>Project Name</label></div>
+      <div class="col-md-4">
+        <input
+          #pName="ngModel"
+          type="text"
+          pattern="^[A-Za-z0-9]{3,15}$"
+          required
+          class="form-control"
+          placeholder="Project Name"
+          name="projectName"
+          [(ngModel)]="onBoardForm.projectName"
+        />
+        <div
+          *ngIf="
+            pName.errors && (pName.invalid || pName.touched) && pName.touched
+          "
+          class="alert alert-danger"
+        >
+          <small
+            class=" alert-dismissible fade show"
+            *ngIf="pName.errors.required && pName.touched"
+            >Proejct Name is required</small
+          >
+          <small
+            class="alert-dismissible fade show"
+            *ngIf="pName.errors.pattern"
+            >Proejct Name Should contain only alphanumberic value and should not
+            exceed 15 characters.</small
+          >
+        </div>
+      </div>
+      <div class="col-md-2"><label>Project Id</label></div>
+      <div class="col-md-4">
+        <input
+          #projId="ngModel"
+          type="text"
+          required
+          class="form-control"
+          placeholder="ID"
+          name="projectId"
+          [(ngModel)]="onBoardForm.projectId"
+        />
+        <div
+          *ngIf="
+            projId.errors &&
+            (projId.invalid || projId.touched) &&
+            projId.touched
+          "
+          class="alert alert-danger"
+        >
+          <small
+            class="alert-dismissible fade show"
+            *ngIf="projId.errors.required && projId.touched"
+            >Project Id is Required</small
+          >
+        </div>
+      </div>
+    </div>
+    <!-- Row No 2 -->
+    <div class="row">
+      <div class="col-md-2"><label>Job Name</label></div>
+      <div class="col-md-4">
+        <input
+          #jName="ngModel"
+          type="text"
+          pattern="^[A-Za-z0-9]{3,15}$"
+          required
+          class="form-control"
+          placeholder="Job Name"
+          name="jobName"
+          [(ngModel)]="onBoardForm.jobName"
+        />
+        <div
+          *ngIf="
+            jName.errors && (jName.invalid || jName.touched) && jName.touched
+          "
+          class="alert alert-danger"
+        >
+          <small
+            class=" alert-dismissible fade show"
+            *ngIf="jName.errors.required && jName.touched"
+            >Job Name is required</small
+          >
+          <small
+            class="alert-dismissible fade show"
+            *ngIf="jName.errors.pattern"
+            >Job Name Should contain only alphanumberic value and should not
+            exceed 15 characters.</small
+          >
+        </div>
+      </div>
+      <div class="col-md-2"><label>Release Date</label></div>
+      <div class="col-md-4 ui-fluid">
+        <p-calendar
+          [(ngModel)]="releaseDate"
+          #cBaseRNew="ngModel"
+          name="releaseDate123"
+          [showIcon]="true"
+          [minDate]="minimumDate"
+          [disabledDates]="invalidDates"
+          required
+        ></p-calendar>
+        <div
+          *ngIf="
+          cBaseRNew.errors && (cBaseRNew.invalid || cBaseRNew.touched) && cBaseRNew.touched
+          "
+          class="alert alert-danger"
+        >
+          <small
+            class=" alert-dismissible fade show"
+            *ngIf="cBaseRNew.errors.required && cBaseRNew.touched"
+            >Release Date is Required</small
+          >
+        </div>
+      </div>
+    </div>
+    <!-- Row No 3 -->
+    <div class="row">
+      <div class="col-md-2"><label>Application Name</label></div>
+      <div class="col-md-4">
+        <input
+          #appName="ngModel"
+          type="text"
+          pattern="^[A-Za-z0-9]{3,15}$"
+          required
+          class="form-control"
+          placeholder="Application Name"
+          name="appName"
+          [(ngModel)]="onBoardForm.appName"
+        />
+        <div *ngIf="appName.errors && (appName.invalid || appName.touched) && appName.touched" class="alert alert-danger">
+                <small
+                  class=" alert-dismissible fade show"
+                  *ngIf="appName.errors.required && appName.touched"
+                  >Application Name is required</small
+                >
+                <small class="alert-dismissible fade show" *ngIf="appName.errors.pattern"
+                  >ceed 15 characters.</small
+                >
+              </div>
+      </div>
+      <div class="col-md-2"><label>AppTypes:</label></div>
+      <div class="col-md-4">
+        <select
+        #appType="ngModel"
+          name="appType"
+          class="custom-select"
+          id="inputGroupSelect01"
+          [(ngModel)]="selectedAppType1.id"
+          (change)="onSelect2($event.target.value)"
+          required
+        >
+          <option value="0"  disabled >--Select--</option>
+          <option *ngFor="let apptype of apptypes" value="{{ apptype.id }}">{{
+            apptype.name
+          }}</option>
+        </select>
+      </div>
+    </div>
+    <!-- Row No 4 -->
+    <div class="row">
+      <div class="col-md-2"><label>CodeBases:</label></div>
+      <div class="col-md-4">
+        <select
+          name="codebase"
+          class="custom-select"
+          id="inputGroupSelect01"
+          (change)="showPopUp($event.target.value)"
+          [(ngModel)]="selectedCodeBase1.langValue"
+          required
+        >
+          <option value="Select">--Select--</option>
+          <option
+            *ngFor="let codebase of codebases"
+            value="{{ codebase.langValue }}"
+            >{{ codebase.name }}</option
+          >
+        </select>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-4"></div>
+    </div>
+    <!-- Row No 5 (Jenkins Credentials)-->
+    <div class="row">
+      <div class="col-md-2"><label>Jenkins Username</label></div>
+      <div class="col-md-4">
+        <input
+          #jenkinsName="ngModel"
+          type="text"
+          pattern="^[A-Za-z0-9]{3,15}$"
+          required
+          class="form-control"
+          placeholder="Jenkins Name"
+          name="jenkinUName"
+          [(ngModel)]="onBoardForm.jenkinsUName"
+        />
+      </div>
+      <div class="col-md-2"><label>Jenkins Password</label></div>
+      <div class="col-md-4">
+        <input
+          #jenkinsPassId="ngModel"
+          type="password"
+          required
+          class="form-control"
+          placeholder="Enter your password"
+          name="password"
+          [(ngModel)]="onBoardForm.password"
+        />
+      </div>
+    </div>
+    <!-- Row no 6 (Source Code Management) -->
+    <div class="row">
+      <div class="col-md-2"><label>Source Code Management</label></div>
+      <div class="col-md-4">
+          <select
+          #sourceCode="ngModel"
+            name="sourceCode"
+            class="custom-select"
+            id="inputGroupSelect03"
+            [(ngModel)]="selectedSourceCode1.id"
+            (change)="getCodeBaseService()"
+            (change)="onSelect3($event.target.value)"
+            
+            required
+          >
+            <option value="0"  disabled >--Select--</option>
+            <option *ngFor="let sourceCode of sourceCodes" value="{{ sourceCode.id }}">{{
+                sourceCode.name
+            }}</option>
+          </select>
+        </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-4"></div>
+    </div>
+    <!-- Temporary Row For Git-->
+    <div class="row" *ngIf="gitFlag">
+        <div class="col-md-2"><label>Git Username</label></div>
+        <div class="col-md-4">
+          <input
+            #gitName="ngModel"
+            type="text"
+            pattern="^[A-Za-z0-9]{3,15}$"
+            required
+            class="form-control"
+            placeholder="Git  UserName"
+            name="gitName"
+            [(ngModel)]="onBoardForm.gitName"
+          />
+        </div>
+        <div class="col-md-2"><label>Git Password</label></div>
+        <div class="col-md-4">
+          <input
+            #gitPassId="ngModel"
+            type="password"
+            required
+            class="form-control"
+            placeholder="Enter your git password"
+            name="gitPassword"
+            [(ngModel)]="onBoardForm.gitpassword"
+          />
+        </div>
+    </div>
+    <div class="row" *ngIf="gitFlag">
+        <div class="col-md-2"><label>Git URL</label></div>
+        <div class="col-md-4">
+            <input
+              #gitUrl="ngModel"
+              type="text"
+              pattern="^[A-Za-z0-9]{3,15}$"
+              required
+              class="form-control"
+              placeholder="Git URL"
+              name="gitUrl"
+              [(ngModel)]="onBoardForm.gitUrl"
+            />
+          </div>
+        <div class="col-md-2"><label>Git Branch</label></div>
+        <div class="col-md-4">
+            <input
+              #gitBranch="ngModel"
+              type="text"
+              pattern="^[A-Za-z0-9]{3,15}$"
+              required
+              class="form-control"
+              placeholder="Git Branch"
+              name="gitBranch"
+              [(ngModel)]="onBoardForm.gitBranch"
+            />
+          </div>
+      </div>
+    <!-- End of Temporary Row (Git)-->
+     <!-- Temporary Row For SVN-->
+     <div class="row" *ngIf="svnFlag">
+            <div class="col-md-2"><label>SVN Username</label></div>
+            <div class="col-md-4">
+              <input
+                #svnName="ngModel"
+                type="text"
+                pattern="^[A-Za-z0-9]{3,15}$"
+                required
+                class="form-control"
+                placeholder="SVN UserName"
+                name="svnName"
+                [(ngModel)]="onBoardForm.svnName"
+              />
+            </div>
+            <div class="col-md-2"><label>SVN Password</label></div>
+            <div class="col-md-4">
+              <input
+                #svnPassId="ngModel"
+                type="password"
+                required
+                class="form-control"
+                placeholder="Enter your git password"
+                name="svnPassword"
+                [(ngModel)]="onBoardForm.svnpassword"
+              />
+            </div>
+      </div>
+      <div class="row" *ngIf="svnFlag">
+          <div class="col-md-2"><label>SVN URL</label></div>
+            <div class="col-md-4">
+                <input
+                  #svnUrl="ngModel"
+                  type="text"
+                  pattern="^[A-Za-z0-9]{3,15}$"
+                  required
+                  class="form-control"
+                  placeholder="SVN URL"
+                  name="svnUrl"
+                  [(ngModel)]="onBoardForm.svnUrl"
+                />
+              </div>
+            <div class="col-md-2"><label>Local Module Directory</label></div>
+            <div class="col-md-4">
+                <input
+                  #svnModule="ngModel"
+                  type="text"
+                  pattern="^[A-Za-z0-9]{3,15}$"
+                  required
+                  class="form-control"
+                  placeholder="Local Module Directory"
+                  name="svnModule"
+                  [(ngModel)]="onBoardForm.svnModule"
+                />
+              </div>
+        </div>
+      <!-- End of Temporary Row (SVN)-->
+       <!-- Temporary Row For TFS-->
+    <div class="row" *ngIf="tfsFlag">
+        <div class="col-md-2"><label>TFS Username</label></div>
+            <div class="col-md-4">
+              <input
+                #tfsName="ngModel"
+                type="text"
+                pattern="^[A-Za-z0-9]{3,15}$"
+                required
+                class="form-control"
+                placeholder="TFS UserName"
+                name="tfsName"
+                [(ngModel)]="onBoardForm.tfsName"
+              />
+            </div>
+            <div class="col-md-2"><label>TFS Password</label></div>
+            <div class="col-md-4">
+              <input
+                #tfsPassId="ngModel"
+                type="password"
+                required
+                class="form-control"
+                placeholder="Enter your TFS password"
+                name="tfsPassword"
+                [(ngModel)]="onBoardForm.tfspassword"
+              />
+            </div>
+      </div>
+      <div class="row" *ngIf="tfsFlag">
+          <div class="col-md-2"><label>Collection URL</label></div>
+            <div class="col-md-4">
+                <input
+                  #tfsUrl="ngModel"
+                  type="text"
+                  pattern="^[A-Za-z0-9]{3,15}$"
+                  required
+                  class="form-control"
+                  placeholder="TFS URL"
+                  name="tfsUrl"
+                  [(ngModel)]="onBoardForm.tfsUrl"
+                />
+              </div>
+            <div class="col-md-2"><label>Project Path</label></div>
+            <div class="col-md-4">
+                <input
+                  #tfsPath="ngModel"
+                  type="text"
+                  pattern="^[A-Za-z0-9]{3,15}$"
+                  required
+                  class="form-control"
+                  placeholder="Project Path"
+                  name="tfsPath"
+                  [(ngModel)]="onBoardForm.tfsPath"
+                />
+              </div>
+        </div>
+      <!-- End of Temporary Row (TFS)-->
+       <!-- Temporary Row For CVS-->
+    <div class="row" *ngIf="cvsFlag">
+      <div class="col-md-2"><label>CVS Root</label></div>
+      <div class="col-md-4">
+        <input
+          #cvsRoot="ngModel"
+          type="text"
+          pattern="^[A-Za-z0-9]{3,15}$"
+          required
+          class="form-control"
+          placeholder="CVS Root"
+          name="cvsRoot"
+          [(ngModel)]="onBoardForm.cvsRoot"
+        />
+      </div>
+      <div class="col-md-2"><label>CVS Password</label></div>
+      <div class="col-md-4">
+        <input
+          #cvsPassId="ngModel"
+          type="password"
+          required
+          class="form-control"
+          placeholder="Enter your TFS password"
+          name="cvsPassword"
+          [(ngModel)]="onBoardForm.cvspassword"
+        />
+      </div>
+      </div>
+      <div class="row" *ngIf="cvsFlag">
+        <div class="col-md-2"><label>Remote Name</label></div>
+        <div class="col-md-4">
+          <input
+            #cvsRemoteName="ngModel"
+            type="text"
+            pattern="^[A-Za-z0-9]{3,15}$"
+            required
+            class="form-control"
+            placeholder="CVS Remote Name"
+            name="cvsRemoteName"
+            [(ngModel)]="onBoardForm.cvsRemoteName"
+          />
+        </div>
+        <div class="col-md-2"><label>Local Name</label></div>
+        <div class="col-md-4">
+          <input
+            #cvsLocalName="ngModel"
+            type="text"
+            required
+            class="form-control"
+            placeholder="Local Name"
+            name="cvsLocalName"
+            [(ngModel)]="onBoardForm.cvsLocalName"
+          />
+        </div>
+        </div>
+      <!-- End of Temporary Row (CVS) -->
+    <!-- Row no 7 -->
+    <div class="row">
+      <div class="col-md-2"><label>Comments</label></div>
+      <div class="col-md-10">
+        <textarea rows="1" class="form-control"> </textarea>
+      </div>
+    </div>
+    <!-- Completed Form -->
+    <p-toast [style]="{marginTop: '80px'}"></p-toast>
+    <button class="btn btn-danger" (click)="onBoardForm.reset()">Reset</button>
+    <button [disabled]="onBoardForm.form.invalid" class="btn btn-primary">
+      Submit
+    </button>
+    <!-- Test -->
+    <button class="btn btn-danger" >asdf</button>
+  </form>
+</div>
+
