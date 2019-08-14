@@ -1,0 +1,42 @@
+[{
+    "id": 1,
+   "appTypeid": 1,
+    "name": "Java",
+    "langValue": "java"
+},
+{
+    "id": 2,
+   "appTypeid": 1,
+    "name": "Kotlin",
+    "langValue": "kotlin"
+},
+{
+    "id": 3,
+   "appTypeid": 2,
+    "name": "Angular",
+    "langValue": "web"
+},
+{
+    "id": 4,
+   "appTypeid": 2,
+    "name": "React",
+    "langValue": "web"
+},
+{
+    "id": 5,
+   "appTypeid": 2,
+    "name": "Polymer",
+    "langValue": "web"
+},
+{
+    "id": 6,
+   "appTypeid": 3,
+    "name": "C#",
+    "langValue": "c#"
+},
+{
+    "id": 7,
+   "appTypeid": 3,
+    "name": "Python",
+    "langValue": "py"
+}]

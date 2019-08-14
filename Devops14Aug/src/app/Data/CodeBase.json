@@ -1,0 +1,18 @@
+[{
+    "id": 1,
+   "appTypeid": 1,
+    "name": "Java",
+    "langValue": "java"
+},
+{
+    "id": 2,
+   "appTypeid": 1,
+    "name": "Kotlin",
+    "langValue": "kotlin"
+},
+{
+    "id": 3,
+   "appTypeid": 2,
+    "name": "Angular",
+    "langValue": "web"
+}]

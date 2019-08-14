@@ -1,0 +1,125 @@
+<!-- popup html code begins here -->
+
+<!--1st type of issues p-card-->
+<!--code to add p-card in the popup page-->
+<p-card
+  header="Types of Issues"
+  styleClass="ui-card-shadow card-margin"
+  [style]="{ margin: '10px' }"
+>
+  <p-header>
+  </p-header>
+  <!--code to add count and icons to different attributes inside type issues p-card-->
+  <div class="container">
+    <div class="row">
+      <!--code to add bugs icon and its count-->
+      <div class="col-md-3">
+        <div>
+          <i class="fa fa-bug" aria-hidden="true"></i
+          ><span class="countFont">{{ report.typeCount.bugsCount }}</span>
+        </div>
+        <div><span class="countNameFont">Bug </span></div>
+      </div>
+      <!--end of code to add bugs icon and its count-->
+
+       <!--code to add vulnerability icon and its count-->
+      <div class="col-md-3">
+        <div> 
+            <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+            <span class="countFont">{{ report.typeCount.vulnerabilityCount }}</span>
+        </div>
+        <div>
+            <span class="countNameFont">Vulnerability </span>
+        </div>
+      </div>
+      <!--end of code to add vulnerability icon and its count-->
+       <!--code to add codeSmell icon and its count-->
+      <div class="col-md-3">
+          <div>
+              <i class="fa fa-minus-circle" aria-hidden="true"></i>
+              <span class="countFont">{{ report.typeCount.codeSmell }}</span>
+            </div>
+            <div>
+                <span class="countNameFont">CodeSmell </span>
+            </div>
+      </div>
+      <!--end of code to add codeSmell icon and its count-->
+        <!--code to add securityHotspot icon and its count-->
+      <div class="col-md-3">
+          <div>
+              <i class="fa fa-shield" aria-hidden="true"></i>
+              <span class="countFont">{{ report.typeCount.securityHotspot }}</span>
+            </div>
+            <div>
+                <span class="countNameFont">Security Hotspot </span>
+            </div>
+      </div>
+    </div>
+  </div>
+</p-card>
+<!--end of 1st type issues p-card-->
+<!--end of type -card code-->
+<!--2nd  Severity issues p-card-->
+<!--code to add severity issues p-card in the popup page-->
+<p-card
+  header="Severity"
+  styleClass="ui-card-shadow"
+  [style]="{ margin: '10px' }"
+>
+  <p-header>
+  </p-header>
+  <!--code to add count and icons to different attributes inside severity issues p-card-->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-2">
+          <div>
+              <i class="fa fa-ban" aria-hidden="true"></i>
+              <span class="countFont">{{ report.severityCount.blockerCount }}</span>
+            </div>
+            <div>
+                <span class="countNameFont">Blocker </span>
+            </div>
+        
+      </div>
+      <div class="col-md-2">
+          <div>
+              <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+              <span class="countFont">{{ report.severityCount.criticalCount }}</span>
+            </div>
+        <div><span class="countNameFont">Critical</span></div>
+      </div>
+      <div class="col-md-2">
+          <div>
+              <i class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+              <span class="countFont">{{  report.severityCount.majorCount}}</span>
+            </div>
+            <div>
+                <span class="countNameFont">Major </span>
+            </div>
+        
+      </div>
+      <div class="col-md-2">
+          <div>
+              <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+              <span class="countFont">{{ report.severityCount.minorCount  }}</span>
+            </div>
+            <div>
+                <span class="countNameFont">Minor </span>
+            </div>
+        
+      </div>
+      <div class="col-md-2">
+          <div>
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              <span class="countFont">{{ report.severityCount.infoCount }}</span>
+            </div>
+            <div>
+                <span class="countNameFont">Info </span>
+            </div>
+        
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+  </div>
+</p-card>
